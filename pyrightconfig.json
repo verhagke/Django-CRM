@@ -1,5 +1,6 @@
 {
-	// Install LSP-json to get validation and autocompletion in this file.
-	"venvPath": "..",
-	"venv": ".venv",
+  // Install LSP-json to get validation and autocompletion in this file.
+  "venvPath": "..",
+  "venv": ".venv",
+  "reportIncompatibleVariableOverride": "none"
 }
