@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.jinja2" %}
 {% block content %}
   <div class="col-md-6 offset-md-3">
     <h1 class="my-5">Add Record</h1>
@@ -9,6 +9,7 @@
 
       <br />
       <button type="submit" class="btn btn-secondary">Add Record</button>
+      <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
     </form>
   </div>
 {% endblock content %}

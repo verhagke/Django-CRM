@@ -23,7 +23,7 @@ def home(request):
             messages.success(request, "There was an error logging in")
             return redirect("home")
     else:
-        return render(request, "home.html", {"records": records})
+        return render(request, "home.jinja2", {"records": records})
 
 
 def logout_user(request):
@@ -46,14 +46,14 @@ def register_user(request):
             return redirect("home")
     else:
         form = SignUpForm()
-    return render(request, "register.html", {"form": form})
+    return render(request, "register.jinja2", {"form": form})
 
 
 def customer_record(request, pk):
     if request.user.is_authenticated:
         # Look up record
         customer_record = Record.objects.get(id=pk)
-        return render(request, "record.html", {"customer_record": customer_record})
+        return render(request, "record.jinja2", {"customer_record": customer_record})
     else:
         messages.success(request, "You must be logged in to view that page.")
         return redirect("home")
@@ -78,7 +78,19 @@ def add_record(request):
                 form.save()
                 messages.success(request, "Record Added")
                 return redirect("home")
-        return render(request, "add_record.html", {"form": form})
+        return render(request, "add_record.jinja2", {"form": form})
     else:
         messages.success(request, "You have to be logged in to create a new record.")
         return redirect("home")
+
+def update_record(request, pk):
+    if request.user.is_authenticated:
+        current_record = Record.objects.get(id=pk)
+        form = AddRecordForm(request.POST or None, instance=current_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record has been updated.")
+            return redirect('home')
+        return render(request, "update_record.jinja2", {'form':form})
+    else:
+        messages.success(request, "You have to be logged in to modify a record.")

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.jinja2' %}
 {% block content %}
   <div class="card mt-5">
     <div class="card-header">
@@ -20,5 +20,10 @@
   <a href="{% url "home" %}" class="btn btn-secondary">Back</a>
   <a href="{% url "delete_record" customer_record.id %}" class="btn btn-danger"
     >Delete</a
+  >
+  <a
+    href="{% url "update_record" customer_record.id %}"
+    class="btn btn-secondary"
+    >Update Record</a
   >
 {% endblock content %}
